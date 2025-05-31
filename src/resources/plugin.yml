@@ -1,0 +1,6 @@
+name: VillagerBarter
+authors: [Cleopatra_Vll]
+version: 0.1
+main: org.oldskooler.villagerbartering.VillagerBarter
+api-version: 1.21
+folia-supported: true
