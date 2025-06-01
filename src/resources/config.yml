@@ -1,2 +1,240 @@
-exampleNumer: 100
-exampleBoolean: true
+worlds:
+  world:
+    armorer:
+      enabled: true
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 1
+      max_level: 5
+    butcher:
+      enabled: true
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 1
+      max_level: 5
+    cartographer:
+      enabled: true
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 1
+      max_level: 5
+    cleric:
+      enabled: true
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 1
+      max_level: 5
+    farmer:
+      enabled: true
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 1
+      max_level: 5
+    fisherman:
+      enabled: true
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 1
+      max_level: 5
+    fletcher:
+      enabled: true
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 1
+      max_level: 5
+    leatherworker:
+      enabled: true
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 1
+      max_level: 5
+    librarian:
+      enabled: true
+      search_radius: 5
+      delay_ticks: 40
+      min_level: 2
+      max_level: 5
+    mason:
+      enabled: true
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 1
+      max_level: 5
+    shepherd:
+      enabled: true
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 1
+      max_level: 5
+    toolsmith:
+      enabled: true
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 1
+      max_level: 5
+    weaponsmith:
+      enabled: true
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 1
+      max_level: 5
+
+  world_nether:
+    armorer:
+      enabled: false
+      search_radius: 4
+      delay_ticks: 50
+      min_level: 1
+      max_level: 4
+    butcher:
+      enabled: false
+      search_radius: 4
+      delay_ticks: 50
+      min_level: 1
+      max_level: 4
+    cartographer:
+      enabled: true
+      search_radius: 5
+      delay_ticks: 45
+      min_level: 2
+      max_level: 5
+    cleric:
+      enabled: true
+      search_radius: 4
+      delay_ticks: 50
+      min_level: 1
+      max_level: 4
+    farmer:
+      enabled: true
+      search_radius: 4
+      delay_ticks: 50
+      min_level: 1
+      max_level: 4
+    fisherman:
+      enabled: false
+      search_radius: 4
+      delay_ticks: 50
+      min_level: 1
+      max_level: 4
+    fletcher:
+      enabled: true
+      search_radius: 4
+      delay_ticks: 50
+      min_level: 1
+      max_level: 4
+    leatherworker:
+      enabled: true
+      search_radius: 4
+      delay_ticks: 50
+      min_level: 1
+      max_level: 4
+    librarian:
+      enabled: true
+      search_radius: 6
+      delay_ticks: 45
+      min_level: 1
+      max_level: 5
+    mason:
+      enabled: false
+      search_radius: 4
+      delay_ticks: 50
+      min_level: 1
+      max_level: 4
+    shepherd:
+      enabled: true
+      search_radius: 4
+      delay_ticks: 50
+      min_level: 1
+      max_level: 4
+    toolsmith:
+      enabled: false
+      search_radius: 4
+      delay_ticks: 50
+      min_level: 1
+      max_level: 4
+    weaponsmith:
+      enabled: true
+      search_radius: 4
+      delay_ticks: 50
+      min_level: 1
+      max_level: 4
+
+  world_the_end:
+    armorer:
+      enabled: true
+      search_radius: 2
+      delay_ticks: 70
+      min_level: 1
+      max_level: 3
+    butcher:
+      enabled: true
+      search_radius: 2
+      delay_ticks: 70
+      min_level: 1
+      max_level: 3
+    cartographer:
+      enabled: false
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 2
+      max_level: 4
+    cleric:
+      enabled: true
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 2
+      max_level: 4
+    farmer:
+      enabled: true
+      search_radius: 2
+      delay_ticks: 70
+      min_level: 1
+      max_level: 3
+    fisherman:
+      enabled: false
+      search_radius: 2
+      delay_ticks: 70
+      min_level: 1
+      max_level: 3
+    fletcher:
+      enabled: true
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 2
+      max_level: 4
+    leatherworker:
+      enabled: true
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 2
+      max_level: 4
+    librarian:
+      enabled: false
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 2
+      max_level: 4
+    mason:
+      enabled: true
+      search_radius: 2
+      delay_ticks: 70
+      min_level: 1
+      max_level: 3
+    shepherd:
+      enabled: true
+      search_radius: 2
+      delay_ticks: 70
+      min_level: 1
+      max_level: 3
+    toolsmith:
+      enabled: true
+      search_radius: 2
+      delay_ticks: 70
+      min_level: 1
+      max_level: 3
+    weaponsmith:
+      enabled: false
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 2
+      max_level: 4

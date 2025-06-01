@@ -22,35 +22,15 @@ import java.util.logging.Logger;
 
 public class VillagerBarter extends JavaPlugin {
     private Logger logger;
+    private BarterConfig barterConfig;
 
-    public static final int SEARCH_RADIUS = 3;
-    public static final int DELAY_TICKS = 3 * 20;
-
-    private static final Set<Villager.Profession> ALLOWED_PROFESSIONS = Set.of(
-            Villager.Profession.ARMORER,// = getProfession("armorer");
-            Villager.Profession.BUTCHER,// = getProfession("butcher");
-            Villager.Profession.CARTOGRAPHER,// = getProfession("cartographer");
-            Villager.Profession.CLERIC,// = getProfession("cleric");
-            Villager.Profession.FARMER,// = getProfession("farmer");
-            Villager.Profession.FISHERMAN,// = getProfession("fisherman");
-            Villager.Profession.FLETCHER,// = getProfession("fletcher");
-            Villager.Profession.LEATHERWORKER,// = getProfession("leatherworker");
-            Villager.Profession.LIBRARIAN,// = getProfession("librarian");
-            Villager.Profession.MASON,// = getProfession("mason");
-            // Villager.Profession.NITWIT,// = getProfession("nitwit");
-            // Villager.Profession.NONE,// = getProfession("none");
-            Villager.Profession.SHEPHERD,// = getProfession("shepherd");
-            Villager.Profession.TOOLSMITH,// = getProfession("toolsmith");
-            Villager.Profession.WEAPONSMITH// = getProfession("weaponsmith");
-    );
-
-    public static final int MIN_LEVEL = 1;
-    public static final int MAX_LEVEL = 5;
 
     @Override
     public void onEnable() {
         logger = getLogger();
         logger.info("Starting plugin");
+
+        barterConfig = new BarterConfig(this);
 
         this.registerListeners();
 
@@ -70,21 +50,13 @@ public class VillagerBarter extends JavaPlugin {
     private void startVillagerBarterTask() {
         for (World world : Bukkit.getWorlds()) {
             for (Villager villager : world.getEntitiesByClass(Villager.class)) {
-                if (!ALLOWED_PROFESSIONS.contains(villager.getProfession())) continue;
-                if (villager.getVillagerLevel() < 1 || villager.getVillagerLevel() > 5) continue;
+                var settings = barterConfig.getSettings(world, villager.getProfession());
 
-                VillagerTradeListener listener = new VillagerTradeListener(this);
+                if (!settings.isEnabled()) continue;
+                if (villager.getVillagerLevel() < settings.getMinLevel() || villager.getVillagerLevel() > settings.getMaxLevel())
+                    continue;
 
-                /*
-                if (canTradeWithVillager(villager)) {
-                    droppedItem.getPersistentDataContainer().set(
-                            new NamespacedKey(this, "unpickable"),
-                            PersistentDataType.BYTE,
-                            (byte) 1
-                    );
-*/
-                List<Item> itemsToConsume = canTradeWithVillager(villager);
-
+                List<Item> itemsToConsume = canTradeWithVillager(villager, settings.getSearchRadius());
                 if (!itemsToConsume.isEmpty()) {
                     for (var droppedItem : itemsToConsume) {
                         droppedItem.getPersistentDataContainer().set(
@@ -97,15 +69,14 @@ public class VillagerBarter extends JavaPlugin {
                     }
 
                     tradeWithVillager(villager, itemsToConsume);
-                    itemsToConsume = canTradeWithVillager(villager);
                 }
             }
         }
     }
 
-    public List<Item> canTradeWithVillager(Villager villager) {
+    public List<Item> canTradeWithVillager(Villager villager, int searchRadius) {
         List<Item> nearbyItems = new ArrayList<>();
-        for (Entity entity : villager.getNearbyEntities(SEARCH_RADIUS, SEARCH_RADIUS, SEARCH_RADIUS)) {
+        for (Entity entity : villager.getNearbyEntities(searchRadius, searchRadius, searchRadius)) {
             if (entity instanceof Item item) nearbyItems.add(item);
         }
 
@@ -156,6 +127,10 @@ public class VillagerBarter extends JavaPlugin {
     }
 
     public void tradeWithVillager(Villager villager, List<Item> itemsToConsume) {
+        var settings = barterConfig.getSettings(villager.getWorld(), villager.getProfession());
+
+        if (!settings.isEnabled()) return;
+
         List<MerchantRecipe> updatedRecipes = new ArrayList<>(villager.getRecipes());
 
         for (int i = 0; i < updatedRecipes.size(); i++) {
@@ -195,7 +170,7 @@ public class VillagerBarter extends JavaPlugin {
                                     // villager.getWorld().dropItemNaturally(villager.getLocation(), result)
                                     //        .setVelocity(new Vector(0, 0.3, 0));
 
-                                    villager.getWorld().getNearbyEntities(villager.getLocation(), SEARCH_RADIUS, SEARCH_RADIUS, SEARCH_RADIUS).stream()
+                                    villager.getWorld().getNearbyEntities(villager.getLocation(), settings.getSearchRadius(), settings.getSearchRadius(), settings.getSearchRadius()).stream()
                                             .filter(e -> e.getType() == EntityType.PLAYER)
                                             .min(Comparator.comparingDouble(e -> e.getLocation().distanceSquared(villager.getLocation())))
                                             .ifPresent(nearestPlayer -> facePlayer(villager, nearestPlayer));
