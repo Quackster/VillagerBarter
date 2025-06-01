@@ -37,11 +37,18 @@ The following professions are allowed to perform barters:
 
 ## Configuration
 
-There is no configuration file. All behavior is currently hardcoded, including:
+The plugin generates a configuration file on first run. You can control behavior per-world and per-profession. Below is an example configuration:
 
-- **Search radius:** 3 blocks in each direction.
-- **Trade check interval:** Every 5 seconds.
-- **Eligible villager level:** 1 to 5.
+```yaml
+worlds:
+  world:
+    armorer:
+      enabled: true
+      search_radius: 3
+      delay_ticks: 60
+      min_level: 1
+      max_level: 5
+```
 
 ## How It Works
 
