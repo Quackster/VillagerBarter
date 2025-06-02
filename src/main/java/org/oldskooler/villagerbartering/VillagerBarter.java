@@ -50,9 +50,15 @@ public class VillagerBarter extends JavaPlugin {
     private void startVillagerBarterTask() {
         for (World world : Bukkit.getWorlds()) {
             for (Villager villager : world.getEntitiesByClass(Villager.class)) {
-                var settings = barterConfig.getSettings(world, villager.getProfession());
+                // Don't get unemployed villagers, nitwits, sleeping or child villagers trade
+                if (villager.getProfession() == Villager.Profession.NONE ||
+                        villager.getProfession() == Villager.Profession.NITWIT ||
+                        !villager.isAdult() ||
+                        villager.isSleeping()) continue;
 
+                var settings = barterConfig.getSettings(world, villager.getProfession());
                 if (!settings.isEnabled()) continue;
+
                 if (villager.getVillagerLevel() < settings.getMinLevel() || villager.getVillagerLevel() > settings.getMaxLevel())
                     continue;
 
