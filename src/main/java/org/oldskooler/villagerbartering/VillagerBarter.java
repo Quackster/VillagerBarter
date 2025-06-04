@@ -1,6 +1,5 @@
 package org.oldskooler.villagerbartering;
 
-import org.bstats.bukkit.Metrics;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -17,7 +16,6 @@ import org.oldskooler.villagerbartering.listeners.VillagerTradeListener;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 
