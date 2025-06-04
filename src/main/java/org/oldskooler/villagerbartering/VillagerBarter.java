@@ -1,5 +1,6 @@
 package org.oldskooler.villagerbartering;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -21,15 +22,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 
 public class VillagerBarter extends JavaPlugin {
+    private static final int BSTATS_PLUGIN_ID = 26080;
+
     private Logger logger;
     private BarterConfig barterConfig;
-
+    private Metrics metrics;
 
     @Override
     public void onEnable() {
         logger = getLogger();
         logger.info("Starting plugin");
 
+        metrics = new Metrics(this, BSTATS_PLUGIN_ID);
         barterConfig = new BarterConfig(this);
 
         this.registerListeners();
